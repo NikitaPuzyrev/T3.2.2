@@ -50,12 +50,6 @@ public class UserService implements UsersService, UserDetailsService {
 
     @Override
     @Transactional
-    public void updateUser(int id, User updatedUser) {
-        userDao.updateUser(id, updatedUser);
-    }
-
-    @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
         if (user == null) {
@@ -73,7 +67,7 @@ public class UserService implements UsersService, UserDetailsService {
         return userDao.findByUsername(username);
     }
     public Optional<User> getOne(int id) {
-        return Optional.ofNullable(userDao.getOne(id));
+        return Optional.ofNullable(userDao.findById(id));
     }
 }
 /*    private final UserRepository userRepository;
