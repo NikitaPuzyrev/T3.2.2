@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    private List<User> list;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -20,14 +20,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findById(int id) {
-        list = entityManager.createQuery("select user from User user where user.id =: idParam", User.class)
-                .setParameter("idParam", id).getResultList();
-        if (list != null) {
-            return list.get(0);
-        } else {
-            return null;
-        }
+        return entityManager.createQuery("select user from User user where user.id =: idParam", User.class)
+                .setParameter("idParam", id).getSingleResult();
     }
+
 
     @Override
     public void saveUser(User user) {
@@ -42,17 +38,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String userName) {
-        list = entityManager.createQuery("select user from User user where user.username =: usernameParam", User.class)
-                .setParameter("usernameParam", userName).getResultList();
-        if (list != null) {
-            return list.get(0);
-        } else {
-            return null;
-        }
+        return entityManager.createQuery("select user from User user where user.username =: usernameParam", User.class)
+                .setParameter("usernameParam", userName).getSingleResult();
     }
-
-   /* public User getOne(int id) {
-        users = entityManager.createQuery("select  u from User u", User.class).getResultList();
-        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
-    }*/
 }

@@ -62,12 +62,7 @@
                        placeholder="Password">
                 <label for="active"><strong>Active</strong></label>
                 <input type="text" th:field="*{active}" id="active" placeholder="Active">
-                <br>
-                <label for="roles"><strong>Role</strong></label>
-                <select class="form-select" size="2" multiple aria th:field="*{roles}" id="roles">
-                    <option value="1">USER</option>
-                    <option value=2>ADMIN</option>
-                </select>
+
                 <input type="submit" value="Add new user" class="bg-success text-white">
             </form>
         </div>

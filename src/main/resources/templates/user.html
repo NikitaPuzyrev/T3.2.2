@@ -45,7 +45,6 @@
         <td><a th:href="@{/myPage}" class="btn btn border-0 bg-light text-info ">User</a></td>
 
 
-
     </div>
 </div>
 
@@ -68,8 +67,7 @@
                     <th>Id</th>
                     <th>Active</th>
                     <th>UserName</th>
-                    <!--<th class="col-md-2">Password</th>-->
-                    <th>Role</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -77,142 +75,114 @@
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.active}"></td>
                     <td th:text="${user.username}"></td>
-                    <td th:text="${user.roles}"></td>
                     <td><a th:href="@{getOne/(id=${user.id})}" class="btn btn-primary">Edit</a></td>
                     <td><a th:href="@{getOne/(id=${user.id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
                 </tr>
-                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-                         aria-hidden="true">
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                     aria-hidden="true">
 
-                        <form th:action="@{userUpdate}"  method="post">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel">Update User</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                    <form th:action="@{userUpdate}" method="post">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Update User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body container text-center">
+
+                                    <div class="form-group">
+                                        <label for="IdEdit"
+                                               class="col-form-label"><strong>Id read only</strong></label>
+                                        <input readonly type="number" class="form-control" id="IdEdit" name="id">
                                     </div>
-                                    <div class="modal-body container text-center">
-
-                                        <div class="form-group">
-                                            <label for="IdEdit"
-                                                   class="col-form-label"><strong>Id read only</strong></label>
-                                            <input readonly type="number" class="form-control" id="IdEdit" name="id">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ActiveEdit"
-                                                   class="col-form-label"><strong>Active</strong></label>
-                                            <input type="text" class="form-control" id="ActiveEdit" name="active">
-
-                                        </div>
-
-                                        <div class="form-group container">
-                                            <label for="UserNameEdit"
-                                                   class="col-form-label"><strong>User name</strong></label>
-                                            <input type="text" class="form-control" id="UserNameEdit" name="username">
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="PasswordEdit"
-                                                   class="col-form-label"><strong>Password</strong></label>
-                                            <input readonly type="text" class="form-control text-hide" id="PasswordEdit" name="password" >
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="RoleEdit"
-                                                   class="form-select"><strong>Role</strong></label>
-                                            <br>
-                                            <select class="form-select" size="2"   id="RoleEdit" name="roles">
-                                                <option value="1">USER</option>
-                                                <option value=2>ADMIN</option>
-                                            </select>
-
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="ActiveEdit"
+                                               class="col-form-label"><strong>Active</strong></label>
+                                        <input type="text" class="form-control" id="ActiveEdit" name="active">
 
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">userUpdate</button>
+
+                                    <div class="form-group container">
+                                        <label for="UserNameEdit"
+                                               class="col-form-label"><strong>User name</strong></label>
+                                        <input type="text" class="form-control" id="UserNameEdit" name="username">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="PasswordEdit"
+                                               class="col-form-label"><strong>Password</strong></label>
+                                        <input readonly type="text" class="form-control text-hide" id="PasswordEdit"
+                                               name="password">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-
-
-
-
-
-                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-                         aria-hidden="true">
-                        <!--/*@thymesVar id="user" type=""*/-->
-                        <form th:action="@{delete}" method="get">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="delModalLabel">Delate User</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body container text-center">
-
-                                        <div class="form-group">
-                                            <label for="IdDel"
-                                                   class="col-form-label"><strong>Id</strong></label>
-                                            <input readonly type="number" class="form-control"
-                                                   id="IdDel" name="id">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ActiveDel"
-                                                   class="col-form-label"><strong>Active</strong></label>
-                                            <input readonly type="text" class="form-control"
-                                                   id="ActiveDel" name="active">
-
-                                        </div>
-
-                                        <div class="form-group container">
-                                            <label for="UserNameDel"
-                                                   class="col-form-label"><strong>User name</strong></label>
-                                            <input readonly type="text" class="form-control"
-                                                   id="UserNameDel" name="username">
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="PasswordDel"
-                                                   class="col-form-label"><strong>Password</strong></label>
-                                            <input readonly type="text" class="form-control text-hide"
-                                                   id="PasswordDel" name="password">
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="RoleDel"
-                                                   class="form-select"><strong>Role</strong></label>
-                                            <br>
-                                            <select readonly class="form-select readonly" size="2"
-                                                    id="RoleDel" name="roles">
-                                                <option value="1">USER</option>
-                                                <option value=2>ADMIN</option>
-                                            </select>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">userUpdate</button>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                     aria-hidden="true">
+                    <!--/*@thymesVar id="user" type=""*/-->
+                    <form th:action="@{delete}" method="get">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="delModalLabel">Delate User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body container text-center">
+
+                                    <div class="form-group">
+                                        <label for="IdDel"
+                                               class="col-form-label"><strong>Id</strong></label>
+                                        <input readonly type="number" class="form-control"
+                                               id="IdDel" name="id">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ActiveDel"
+                                               class="col-form-label"><strong>Active</strong></label>
+                                        <input readonly type="text" class="form-control"
+                                               id="ActiveDel" name="active">
+
+                                    </div>
+
+                                    <div class="form-group container">
+                                        <label for="UserNameDel"
+                                               class="col-form-label"><strong>User name</strong></label>
+                                        <input readonly type="text" class="form-control"
+                                               id="UserNameDel" name="username">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="PasswordDel"
+                                               class="col-form-label"><strong>Password</strong></label>
+                                        <input readonly type="text" class="form-control text-hide"
+                                               id="PasswordDel" name="password">
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                    </button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
                 </tbody>
             </table>

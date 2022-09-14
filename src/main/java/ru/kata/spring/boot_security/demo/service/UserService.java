@@ -70,53 +70,5 @@ public class UserService implements UsersService, UserDetailsService {
         return Optional.ofNullable(userDao.findById(id));
     }
 }
-/*    private final UserRepository userRepository;
 
-    public Optional<User> getOne(int id) {
-        return userRepository.findById(id);
-    }
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public User findById(int id) {
-        return userRepository.findById(Math.toIntExact(id)).orElse(null);
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public void deleteById(int id) {
-        userRepository.deleteById(Math.toIntExact(id));
-    }
-    public List<User> getAll(){return userRepository.findAll();}
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
-    }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public void delete(int id) {
-        userRepository.deleteById(id);
-    }*/
 
