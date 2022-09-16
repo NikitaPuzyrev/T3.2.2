@@ -1,12 +1,10 @@
 package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +15,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
-    private final UserService userService;
 
-    public SuccessUserHandler(UserService userService) {
-        this.userService = userService;
+    public SuccessUserHandler() {
     }
 
     @Override
