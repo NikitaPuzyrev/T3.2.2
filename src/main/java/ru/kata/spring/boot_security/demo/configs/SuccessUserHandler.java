@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
-    UserService userService;
+    private final UserService userService;
 
     public SuccessUserHandler(UserService userService) {
         this.userService = userService;
