@@ -7,15 +7,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role_u")
 public class Role implements GrantedAuthority {
+    @Override
+    public String toString() {
+        return  name ;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Override
-    public String toString() {
-        return name;
-    }
 
     @Column
     private String name;

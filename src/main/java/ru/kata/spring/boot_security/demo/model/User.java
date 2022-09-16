@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_r")
@@ -16,8 +17,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public User(String username, String password, Collection<? extends GrantedAuthority> grantedAuthorities) {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", active=" + active +
+                ", roles=" + roles +
+                '}';
     }
+
 
     @Column
     private String username;
@@ -28,18 +38,24 @@ public class User implements UserDetails {
 
     public User() {
     }
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
-    private List<Role> roles;
+    private Set<Role> roles;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
-
+    @Override
     public String getPassword() {
         return password;
     }
@@ -56,14 +72,10 @@ public class User implements UserDetails {
         this.active = active;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
+    @Override
     public String getUsername() {
         return username;
     }
@@ -88,13 +100,10 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+      public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
     }
 
 }
