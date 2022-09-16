@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user_r")
-
 public class User implements UserDetails {
     @Id
     @Column
