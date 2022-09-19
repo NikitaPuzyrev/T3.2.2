@@ -15,7 +15,7 @@ $('document').ready(function () {
                   $('#ActiveEdit').val(user.active);
                   $('#UserNameEdit').val(user.username);
                   $('#PasswordEdit').val(user.password);
-                  $('#RoleEdit').val(user.roles);
+              /*    $('#RoleEdit').val(user.roles);*/
             });
 
         $('#editModal').modal();

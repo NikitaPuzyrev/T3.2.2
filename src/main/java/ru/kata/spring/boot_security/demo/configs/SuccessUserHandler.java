@@ -19,6 +19,7 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
     public SuccessUserHandler() {
     }
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         User principal = (User) authentication.getPrincipal();

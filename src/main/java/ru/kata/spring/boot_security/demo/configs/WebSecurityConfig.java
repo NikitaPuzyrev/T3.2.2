@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/")
                 .permitAll();
         System.out.println();
-            }
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

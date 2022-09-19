@@ -24,7 +24,6 @@ public class UserController {
         return "/userPage";
     }
 
-
     @GetMapping("myPage")
     public String pageUserForm(Principal principal) {
         User user = userService.findByUsername(principal.getName());

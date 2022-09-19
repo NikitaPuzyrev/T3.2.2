@@ -16,7 +16,11 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 text-light bg-dark">admin with roles [ROLE_ADMIN]</div>
+        <div class="col-md-11 bg-dark border-0 text-light">
+            <th th:text="${user.username}" ></th>
+            with roles
+            <th th:text="${user.roles}"></th>
+        </div>
 
         <div class="col-md-1" style="background-color: black">
             <div>
