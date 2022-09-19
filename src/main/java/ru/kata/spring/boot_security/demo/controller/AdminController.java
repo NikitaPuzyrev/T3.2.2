@@ -18,14 +18,16 @@ public class AdminController {
     }
 
     private final UserService userService;
+
     @GetMapping("adminPage/{id}")
     public String updateadminPageForm(Model model) {
-   //     User userAd = userService.findById(id);
+        //     User userAd = userService.findById(id);
 
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "user";
     }
+
     @GetMapping("adminPage")
     public String pageAdminPageForm(Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -33,11 +35,12 @@ public class AdminController {
     }
 
     @GetMapping("/user")
-    public String findAllUser(Principal principal, Model model1, Model model) {
+    public String findAllUser(Principal principal, Model model) {
         User us = userService.findByUsername(principal.getName());
-        model1.addAttribute(us);
+
         List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+        model.addAttribute("users", users)
+                .addAttribute("user", us);
         return "user";
     }
 
@@ -75,17 +78,19 @@ public class AdminController {
     public String newUser(User user) {
         return "newUser";
     }
+
     @PostMapping("newUser")
     public String newUserUpdate(User user) {
         userService.saveUser(user);
         return "redirect:/user";
     }
+
     @RequestMapping("/getOne")
     @ResponseBody
-    public Optional<User> getOne(int id)
-    {
+    public Optional<User> getOne(int id) {
         return userService.getOne(id);
     }
+
     @RequestMapping("/getAll")
     public String getAll(Model model) {
         List<User> users = userService.getAllUsers();
@@ -93,7 +98,7 @@ public class AdminController {
         return "user";
     }
 
-    @RequestMapping(value="/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(int id) {
         userService.deleteById(id);
         return "redirect:/user";
