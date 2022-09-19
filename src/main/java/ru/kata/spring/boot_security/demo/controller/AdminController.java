@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,24 @@ public class AdminController {
     }
 
     private final UserService userService;
+    @GetMapping("adminPage/{id}")
+    public String updateadminPageForm(Model model) {
+   //     User userAd = userService.findById(id);
+
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "user";
+    }
+    @GetMapping("adminPage")
+    public String pageAdminPageForm(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        return "redirect:/adminPage/" + user.getId();
+    }
 
     @GetMapping("/user")
-    public String findAllUser(Model model) {
+    public String findAllUser(Principal principal, Model model1, Model model) {
+        User us = userService.findByUsername(principal.getName());
+        model1.addAttribute(us);
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "user";
